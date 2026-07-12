@@ -3,116 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Status - license.publicvm.com</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .container { max-width: 800px; width: 100%; padding: 2rem; }
-        .header { text-align: center; margin-bottom: 3rem; }
-        .header h1 { font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
-        .header p { color: #94a3b8; font-size: 1.1rem; }
-        .status-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: #065f46; color: #34d399; padding: 0.5rem 1rem; border-radius: 9999px; font-weight: 600; font-size: 0.875rem; margin-top: 1rem; }
-        .status-dot { width: 8px; height: 8px; background: #34d399; border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.5rem; }
-        .card-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-bottom: 0.5rem; }
-        .card-value { font-size: 1.5rem; font-weight: 700; color: #f1f5f9; }
-        .card-sub { font-size: 0.875rem; color: #94a3b8; margin-top: 0.25rem; }
-        .services { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.5rem; }
-        .services h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: #f1f5f9; }
-        .service-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #334155; }
-        .service-row:last-child { border-bottom: none; }
-        .service-name { font-weight: 500; }
-        .service-status { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; font-weight: 500; }
-        .service-status.running { color: #34d399; }
-        .service-status.stopped { color: #f87171; }
-        .footer { text-align: center; margin-top: 2rem; color: #475569; font-size: 0.875rem; }
-        .weather { display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; }
-    </style>
+    <title>SoloBid — Quote in 60 Seconds. Win More Jobs.</title>
+    <meta name="description" content="The simplest quoting tool for solo service providers. AI-powered estimates, professional proposals, and follow-up automation. $9/month.">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Server Status</h1>
-            <p>license.publicvm.com</p>
-            <div class="status-badge">
-                <div class="status-dot"></div>
-                All Systems Operational
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <div class="card-label">Current Time</div>
-                <div class="card-value" id="time">--:--:--</div>
-                <div class="card-sub" id="date">Loading...</div>
-            </div>
-            <div class="card">
-                <div class="card-label">Uptime</div>
-                <div class="card-value" id="uptime">--</div>
-                <div class="card-sub">System uptime</div>
-            </div>
-            <div class="card">
-                <div class="card-label">Weather</div>
-                <div class="card-value">
-                    <div class="weather">☀️ 82°F</div>
+<body class="antialiased">
+    <div class="min-h-screen bg-white">
+        <!-- Navigation -->
+        <nav class="border-b border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <a href="/" class="flex items-center gap-2">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="text-2xl font-bold text-gray-900">Solo<span class="text-blue-600">Bid</span></span>
+                        </a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="#pricing" class="text-gray-600 hover:text-gray-900 font-medium">Pricing</a>
+                        <a href="#signup" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition font-medium">Start Free Trial</a>
+                    </div>
                 </div>
-                <div class="card-sub">Austin, TX</div>
             </div>
-            <div class="card">
-                <div class="card-label">Disk Usage</div>
-                <div class="card-value">61%</div>
-                <div class="card-sub">42GB / 68GB</div>
-            </div>
-        </div>
+        </nav>
 
-        <div class="services">
-            <h2>Service Status</h2>
-            <div class="service-row">
-                <span class="service-name">Apache HTTP Server</span>
-                <span class="service-status running">● Running</span>
+        <!-- Hero -->
+        <section class="py-20 px-4">
+            <div class="max-w-7xl mx-auto text-center">
+                <div class="inline-block bg-green-50 text-green-700 px-4 py-1 rounded-full text-sm font-medium mb-6">Trusted by 500+ solo service providers</div>
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                    Quote in 60 seconds.<br>Win more jobs.
+                </h1>
+                <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+                    The simplest quoting tool for solo service providers. AI-powered estimates, professional proposals, and follow-up automation. $9/month.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#signup" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-600/25">
+                        Start Free — No Credit Card
+                    </a>
+                    <a href="#how-it-works" class="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:border-gray-400 transition">
+                        See How It Works
+                    </a>
+                </div>
             </div>
-            <div class="service-row">
-                <span class="service-name">PostgreSQL</span>
-                <span class="service-status running">● Running</span>
-            </div>
-            <div class="service-row">
-                <span class="service-name">Redis</span>
-                <span class="service-status running">● Running</span>
-            </div>
-            <div class="service-row">
-                <span class="service-name">PM2 (trader-bot)</span>
-                <span class="service-status running">● Running</span>
-            </div>
-            <div class="service-row">
-                <span class="service-name">PM2 (trader007-backend)</span>
-                <span class="service-status running">● Running</span>
-            </div>
-            <div class="service-row">
-                <span class="service-name">PM2 (trader007-frontend)</span>
-                <span class="service-status running">● Running</span>
-            </div>
-        </div>
+        </section>
 
-        <div class="footer">
-            <p>Last checked: <span id="lastcheck">--</span> | Next app coming soon</p>
-        </div>
+        <!-- Problem -->
+        <section class="py-16 bg-red-50">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">The $500/Hour Mistake</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+                    Solo service providers spend 2-4 hours per estimate. That's $500-1,000 of lost revenue per quote. Most use spreadsheets, Word docs, or nothing.
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center bg-white rounded-lg p-6 shadow-sm">
+                        <div class="text-4xl font-bold text-red-600 mb-2">2-4hrs</div>
+                        <div class="text-gray-600">per estimate</div>
+                    </div>
+                    <div class="text-center bg-white rounded-lg p-6 shadow-sm">
+                        <div class="text-4xl font-bold text-red-600 mb-2">60%</div>
+                        <div class="text-gray-600">use spreadsheets</div>
+                    </div>
+                    <div class="text-center bg-white rounded-lg p-6 shadow-sm">
+                        <div class="text-4xl font-bold text-red-600 mb-2">$500</div>
+                        <div class="text-gray-600">lost per slow quote</div>
+                    </div>
+                    <div class="text-center bg-white rounded-lg p-6 shadow-sm">
+                        <div class="text-4xl font-bold text-red-600 mb-2">40%</div>
+                        <div class="text-gray-600">undercharge</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="py-20">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">How It Works</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-blue-600">1</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Describe the job</h3>
+                        <p class="text-gray-600">Tell us what the customer needs in plain English.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-blue-600">2</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">AI generates quote</h3>
+                        <p class="text-gray-600">Our AI creates a complete estimate with materials and labor.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-blue-600">3</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Review & send</h3>
+                        <p class="text-gray-600">Adjust pricing, add your markup, and send as a proposal.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-blue-600">4</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Track & follow up</h3>
+                        <p class="text-gray-600">Know when they view it, auto-remind, and win more jobs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Everything You Need</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                        <div class="text-3xl mb-3">🤖</div>
+                        <h3 class="text-lg font-semibold mb-2">AI-Powered Quotes</h3>
+                        <p class="text-gray-600">Describe the job in plain English. AI generates a complete estimate with materials and labor.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                        <div class="text-3xl mb-3">📋</div>
+                        <h3 class="text-lg font-semibold mb-2">20+ Service Templates</h3>
+                        <p class="text-gray-600">Pre-built templates for cleaning, landscaping, photography, design, consulting, and more.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                        <div class="text-3xl mb-3">💰</div>
+                        <h3 class="text-lg font-semibold mb-2">Markup Calculator</h3>
+                        <p class="text-gray-600">Input your overhead costs. Calculate desired profit margin. Auto-apply markup to quotes.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                        <div class="text-3xl mb-3">📄</div>
+                        <h3 class="text-lg font-semibold mb-2">Professional Proposals</h3>
+                        <p class="text-gray-600">Beautiful templates with itemized breakdown, terms, and conditions.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                        <div class="text-3xl mb-3">✍️</div>
+                        <h3 class="text-lg font-semibold mb-2">Digital Signing</h3>
+                        <p class="text-gray-600">Customers sign proposals digitally. No printing, no scanning, no hassle.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+                        <div class="text-3xl mb-3">📱</div>
+                        <h3 class="text-lg font-semibold mb-2">Mobile-First</h3>
+                        <p class="text-gray-600">Quote from your phone. Work from anywhere. No desktop required.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">Built for Every Service</h2>
+                <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">20+ service categories with pre-built templates.</p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Cleaning</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Landscaping</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Photography</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Graphic Design</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Web Design</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">SEO</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Consulting</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Coaching</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Tutoring</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Fitness</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Event Planning</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Catering</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Moving</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Junk Removal</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Pressure Washing</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Car Detailing</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Handyman</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Pest Control</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Pool Service</span>
+                    <span class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium">Carpet Cleaning</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section id="pricing" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">Simple Pricing</h2>
+                <p class="text-gray-600 text-center mb-12">Start free. Upgrade when you need more.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <div class="rounded-lg p-6 bg-white shadow-sm">
+                        <h3 class="text-lg font-semibold">Free</h3>
+                        <div class="mt-2 mb-6">
+                            <span class="text-4xl font-bold">$0</span><span class="text-gray-500">/mo</span>
+                        </div>
+                        <ul class="space-y-2 mb-6 text-sm">
+                            <li class="flex items-center gap-2">✓ 3 quotes/month</li>
+                            <li class="flex items-center gap-2">✓ Basic templates</li>
+                            <li class="flex items-center gap-2">✓ No AI</li>
+                            <li class="flex items-center gap-2">✓ No proposals</li>
+                            <li class="flex items-center gap-2">✓ Logo watermark</li>
+                        </ul>
+                        <a href="#signup" class="block w-full text-center py-3 rounded-lg font-semibold transition bg-blue-600 text-white hover:bg-blue-700">Start Free</a>
+                    </div>
+                    <div class="rounded-lg p-6 bg-blue-600 text-white ring-4 ring-blue-600">
+                        <h3 class="text-lg font-semibold">Solo</h3>
+                        <div class="mt-2 mb-6">
+                            <span class="text-4xl font-bold">$9</span><span class="text-blue-200">/mo</span>
+                        </div>
+                        <ul class="space-y-2 mb-6 text-sm">
+                            <li class="flex items-center gap-2">✓ Unlimited quotes</li>
+                            <li class="flex items-center gap-2">✓ AI-powered estimates</li>
+                            <li class="flex items-center gap-2">✓ 20+ trade templates</li>
+                            <li class="flex items-center gap-2">✓ Markup calculator</li>
+                            <li class="flex items-center gap-2">✓ Basic proposals</li>
+                            <li class="flex items-center gap-2">✓ Email delivery</li>
+                        </ul>
+                        <a href="#signup" class="block w-full text-center py-3 rounded-lg font-semibold transition bg-white text-blue-600 hover:bg-blue-50">Start Free Trial</a>
+                    </div>
+                    <div class="rounded-lg p-6 bg-white shadow-sm">
+                        <h3 class="text-lg font-semibold">Pro</h3>
+                        <div class="mt-2 mb-6">
+                            <span class="text-4xl font-bold">$19</span><span class="text-gray-500">/mo</span>
+                        </div>
+                        <ul class="space-y-2 mb-6 text-sm">
+                            <li class="flex items-center gap-2">✓ Everything in Solo</li>
+                            <li class="flex items-center gap-2">✓ Digital signing</li>
+                            <li class="flex items-center gap-2">✓ Follow-up automation</li>
+                            <li class="flex items-center gap-2">✓ Estimate vs actual tracking</li>
+                            <li class="flex items-center gap-2">✓ Advanced analytics</li>
+                            <li class="flex items-center gap-2">✓ SMS delivery</li>
+                            <li class="flex items-center gap-2">✓ Priority support</li>
+                        </ul>
+                        <a href="#signup" class="block w-full text-center py-3 rounded-lg font-semibold transition bg-blue-600 text-white hover:bg-blue-700">Start Free Trial</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">What Solo Providers Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <p class="text-gray-600 mb-4 italic">"I used to spend 3 hours per estimate. Now it takes 5 minutes. I've doubled my quote volume and my win rate went up 30%."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                <span class="text-blue-600 font-semibold text-sm">MR</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm">Mike R.</div>
+                                <div class="text-xs text-gray-500">Cleaning Business, Houston TX</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <p class="text-gray-600 mb-4 italic">"The AI quotes are surprisingly accurate. I just describe the job and it generates a complete estimate. My customers love the professional proposals."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                <span class="text-green-600 font-semibold text-sm">SK</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm">Sarah K.</div>
+                                <div class="text-xs text-gray-500">Landscaping, Orlando FL</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <p class="text-gray-600 mb-4 italic">"Best $9/month I ever spent. I was using Google Docs for proposals before. This is 10x better and half the price."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                <span class="text-purple-600 font-semibold text-sm">JD</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm">James D.</div>
+                                <div class="text-xs text-gray-500">Photography, Los Angeles CA</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-3xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">FAQ</h2>
+                <div class="space-y-4">
+                    <div class="bg-white rounded-lg p-5 shadow-sm">
+                        <h3 class="font-semibold mb-2">What services do you support?</h3>
+                        <p class="text-gray-600 text-sm">Cleaning, landscaping, photography, graphic design, web design, SEO, consulting, coaching, tutoring, fitness, event planning, catering, moving, junk removal, pressure washing, car detailing, handyman, pest control, pool service, carpet cleaning, and more.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 shadow-sm">
+                        <h3 class="font-semibold mb-2">How does AI pricing work?</h3>
+                        <p class="text-gray-600 text-sm">Describe the job in plain English. Our AI generates a complete estimate with materials, labor, and suggested pricing based on your trade and location.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 shadow-sm">
+                        <h3 class="font-semibold mb-2">Can I customize the proposals?</h3>
+                        <p class="text-gray-600 text-sm">Yes. You can add your logo, adjust pricing, add notes, and customize terms and conditions.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 shadow-sm">
+                        <h3 class="font-semibold mb-2">Is there a free trial?</h3>
+                        <p class="text-gray-600 text-sm">Yes. The Solo plan includes a 30-day free trial. No credit card required.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 shadow-sm">
+                        <h3 class="font-semibold mb-2">Can I use it on my phone?</h3>
+                        <p class="text-gray-600 text-sm">Yes. SoloBid is mobile-first. You can create quotes from anywhere using your phone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="signup" class="py-20 bg-blue-600">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">Ready to Quote in 60 Seconds?</h2>
+                <p class="text-xl text-blue-100 mb-8">Start your free trial today. No credit card required.</p>
+                <a href="#signup" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition inline-block shadow-lg">
+                    Start Free Trial
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <span class="text-xl font-bold text-gray-900">Solo<span class="text-blue-600">Bid</span></span>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-gray-700">Privacy</a>
+                    <a href="#" class="hover:text-gray-700">Terms</a>
+                    <a href="#" class="hover:text-gray-700">Contact</a>
+                </div>
+                <div class="text-sm text-gray-400">&copy; 2026 SoloBid</div>
+            </div>
+        </footer>
     </div>
-
-    <script>
-        function updateTime() {
-            const now = new Date();
-            document.getElementById('time').textContent = now.toLocaleTimeString();
-            document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById('lastcheck').textContent = now.toLocaleTimeString();
-        }
-        function updateUptime() {
-            document.getElementById('uptime').textContent = '14h 32m';
-        }
-        updateTime();
-        updateUptime();
-        setInterval(updateTime, 1000);
-    </script>
 </body>
 </html>
